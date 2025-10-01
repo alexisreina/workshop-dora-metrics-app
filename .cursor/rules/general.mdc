@@ -1,0 +1,10 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# General
+
+when running commands prefer to use tools directly as `dotnet run`, `dotnet test` over running them via powershell
+after doing changes, reformat code by calling `dotnet tool run csharpier format .`

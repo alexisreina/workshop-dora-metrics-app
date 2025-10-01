@@ -1,0 +1,22 @@
+---
+description: Describes basic rules when working with frontend in this repository
+alwaysApply: false
+---
+
+# Summary
+
+- Use Vue 3 and Nuxt 4 as the primary frameworks for all frontend development.
+- Write all frontend code in TypeScript.
+- Use PrimeVue as the main component library.
+- Organize components, composables, and stores according to Nuxt conventions (e.g., `components/`, `composables/`, `stores/`).
+- Prefer the Composition API for all new Vue components and logic.
+- Ensure all components and composables are strongly typed.
+- Use tailwindcss for styling the vue components.
+- Follow established linting and formatting rules (e.g., ESLint, Prettier) for consistency.
+- Write unit and integration tests for all components and composables, using the recommended testing tools for Vue/Nuxt.
+- Document public components and composables with JSDoc/TSDoc comments.
+
+## Additional Workflow Rules
+
+- After making any changes to frontend code, always run `npm run build` to ensure the application builds successfully and to catch any build-time errors early.
+- When installing new libraries or dependencies, always run `npm install` to update your local `node_modules` and lockfile before proceeding with further development or builds.
