@@ -37,58 +37,70 @@
 - Include exact file paths in descriptions
 
 ## Path Conventions
-- **Single project**: `src/`, `tests/` at repository root
-- **Web app**: `backend/src/`, `frontend/src/`
-- **Mobile**: `api/src/`, `ios/src/` or `android/src/`
-- Paths shown below assume single project - adjust based on plan.md structure
+- **Nuxt 4 Full-Stack**: `app/`, `src/`, `tests/` at repository root
+- **Components**: `app/components/` (atoms, molecules, organisms, templates)
+- **Pages**: `app/pages/` for file-based routing
+- **Composables**: `app/composables/` for shared logic
+- **Server**: `app/server/` for API routes and middleware
+- Paths shown below assume Nuxt 4 structure - adjust based on plan.md structure
 
 ## Phase 3.1: Setup
-- [ ] T001 Create project structure per implementation plan
-- [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+- [ ] T001 Create Nuxt 4 project structure per implementation plan
+- [ ] T002 Initialize Nuxt 4 project with Vue 3, PrimeVue, and Tailwind CSS dependencies
+- [ ] T003 [P] Configure ESLint, Prettier, and TypeScript
+- [ ] T004 [P] Setup PrimeVue module configuration in nuxt.config.ts
+- [ ] T005 [P] Configure Tailwind CSS with PrimeVue integration
 
 ## Phase 3.2: Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
 **CRITICAL: These tests MUST be written and MUST FAIL before ANY implementation**
-- [ ] T004 [P] Contract test POST /api/users in tests/contract/test_users_post.py
-- [ ] T005 [P] Contract test GET /api/users/{id} in tests/contract/test_users_get.py
-- [ ] T006 [P] Integration test user registration in tests/integration/test_registration.py
-- [ ] T007 [P] Integration test auth flow in tests/integration/test_auth.py
+- [ ] T006 [P] Contract test POST /api/users in tests/contract/test_users_post.ts
+- [ ] T007 [P] Contract test GET /api/users/{id} in tests/contract/test_users_get.ts
+- [ ] T008 [P] Component test for user registration form in tests/unit/components/UserRegistrationForm.test.ts
+- [ ] T009 [P] Integration test user registration flow in tests/integration/test_registration.ts
+- [ ] T010 [P] Integration test auth flow in tests/integration/test_auth.ts
 
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
-- [ ] T008 [P] User model in src/models/user.py
-- [ ] T009 [P] UserService CRUD in src/services/user_service.py
-- [ ] T010 [P] CLI --create-user in src/cli/user_commands.py
-- [ ] T011 POST /api/users endpoint
-- [ ] T012 GET /api/users/{id} endpoint
-- [ ] T013 Input validation
-- [ ] T014 Error handling and logging
+- [ ] T011 [P] User composable in app/composables/useUser.ts
+- [ ] T012 [P] UserService CRUD in app/services/userService.ts
+- [ ] T013 [P] UserRegistrationForm component in app/components/organisms/UserRegistrationForm.vue
+- [ ] T014 [P] UserList component in app/components/organisms/UserList.vue
+- [ ] T015 POST /api/users endpoint in app/server/api/users.post.ts
+- [ ] T016 GET /api/users/[id].get.ts endpoint
+- [ ] T017 Input validation composable in app/composables/useValidation.ts
+- [ ] T018 Error handling and logging middleware
 
 ## Phase 3.4: Integration
-- [ ] T015 Connect UserService to DB
-- [ ] T016 Auth middleware
-- [ ] T017 Request/response logging
-- [ ] T018 CORS and security headers
+- [ ] T019 Connect UserService to database/storage
+- [ ] T020 Auth middleware in app/middleware/auth.ts
+- [ ] T021 Request/response logging plugin
+- [ ] T022 CORS and security headers configuration
+- [ ] T023 PrimeVue theme customization
+- [ ] T024 Tailwind CSS component styling
 
 ## Phase 3.5: Polish
-- [ ] T019 [P] Unit tests for validation in tests/unit/test_validation.py
-- [ ] T020 Performance tests (<200ms)
-- [ ] T021 [P] Update docs/api.md
-- [ ] T022 Remove duplication
-- [ ] T023 Run manual-testing.md
+- [ ] T025 [P] Unit tests for composables in tests/unit/composables/
+- [ ] T026 [P] Component tests for all Vue components
+- [ ] T027 Performance tests (<200ms page load)
+- [ ] T028 [P] Update documentation
+- [ ] T029 Remove code duplication
+- [ ] T030 Accessibility testing and improvements
+- [ ] T031 Run manual testing scenarios
 
 ## Dependencies
-- Tests (T004-T007) before implementation (T008-T014)
-- T008 blocks T009, T015
-- T016 blocks T018
-- Implementation before polish (T019-T023)
+- Tests (T006-T010) before implementation (T011-T018)
+- T011 blocks T012, T019
+- T013 blocks T014 (shared user data)
+- T020 blocks T022
+- Implementation before polish (T025-T031)
 
 ## Parallel Example
 ```
-# Launch T004-T007 together:
-Task: "Contract test POST /api/users in tests/contract/test_users_post.py"
-Task: "Contract test GET /api/users/{id} in tests/contract/test_users_get.py"
-Task: "Integration test registration in tests/integration/test_registration.py"
-Task: "Integration test auth in tests/integration/test_auth.py"
+# Launch T006-T010 together:
+Task: "Contract test POST /api/users in tests/contract/test_users_post.ts"
+Task: "Contract test GET /api/users/{id} in tests/contract/test_users_get.ts"
+Task: "Component test for user registration form in tests/unit/components/UserRegistrationForm.test.ts"
+Task: "Integration test registration in tests/integration/test_registration.ts"
+Task: "Integration test auth in tests/integration/test_auth.ts"
 ```
 
 ## Notes

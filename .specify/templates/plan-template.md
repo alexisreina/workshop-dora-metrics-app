@@ -47,7 +47,15 @@
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+### Frontend Application Compliance
+- [ ] **SOLID Principles**: All components follow single responsibility, open/closed, Liskov substitution, interface segregation, and dependency inversion
+- [ ] **Vue 3 Composition API**: Components use `<script setup>` syntax and Composition API patterns
+- [ ] **Nuxt 4 Framework**: Leveraging Nuxt 4 for full-stack capabilities, SSR, and module system
+- [ ] **PrimeVue Components**: Using PrimeVue component library for UI elements
+- [ ] **Tailwind CSS**: Utility-first styling approach with minimal custom CSS
+- [ ] **KISS Principle**: Complexity justified, simple solutions preferred
+- [ ] **Code Quality**: ESLint and Prettier compliance, TypeScript usage
+- [ ] **Testing Strategy**: Unit tests for composables, component tests, integration tests for user flows
 
 ## Project Structure
 
@@ -82,20 +90,33 @@ tests/
 ├── integration/
 └── unit/
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+# [REMOVE IF UNUSED] Option 2: Nuxt 4 Full-Stack Application (DEFAULT for this project)
+app/
+├── components/
+│   ├── atoms/
+│   ├── molecules/
+│   ├── organisms/
+│   └── templates/
+├── pages/
+├── composables/
+├── middleware/
+├── plugins/
+├── server/
+│   ├── api/
+│   └── middleware/
+└── utils/
 
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
+src/
+├── components/
+├── pages/
+├── styles/
+├── test/
+└── utils/
+
+tests/
+├── unit/
+├── integration/
+└── e2e/
 
 # [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
 api/
@@ -216,4 +237,4 @@ directories captured above]
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+*Based on Constitution v1.1.0 - See `/memory/constitution.md`*

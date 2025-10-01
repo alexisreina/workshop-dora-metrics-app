@@ -36,6 +36,7 @@
 - **Mandatory sections**: Must be completed for every feature
 - **Optional sections**: Include only when relevant to the feature
 - When a section doesn't apply, remove it entirely (don't leave as "N/A")
+- **Frontend Focus**: Specifications should emphasize user experience, component interactions, and UI/UX requirements
 
 ### For AI Generation
 When creating this spec from a user prompt:
@@ -49,6 +50,9 @@ When creating this spec from a user prompt:
    - Error handling behaviors
    - Integration requirements
    - Security/compliance needs
+   - UI/UX requirements and accessibility
+   - Component behavior and interactions
+   - Responsive design requirements
 
 ---
 

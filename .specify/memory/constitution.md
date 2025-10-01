@@ -1,50 +1,92 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: 1.0.0 → 1.1.0
+Modified principles: All principles updated for frontend application
+Added sections: Technology Stack, Code Quality Standards, Development Workflow
+Removed sections: None (template structure maintained)
+Templates requiring updates: 
+  ✅ plan-template.md (updated for frontend principles)
+  ✅ spec-template.md (updated for frontend scope)
+  ✅ tasks-template.md (updated for frontend task types)
+  ✅ agent-file-template.md (updated for frontend context)
+Follow-up TODOs: None
+-->
+
+# Workshop DORA Metrics App Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. SOLID Principles Compliance
+All components and modules MUST follow SOLID principles: Single Responsibility (each component has one clear purpose), Open/Closed (extensible without modification), Liskov Substitution (components are interchangeable), Interface Segregation (focused interfaces), and Dependency Inversion (depend on abstractions, not concretions). This ensures maintainable, testable, and scalable code architecture.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Vue 3 Composition API First
+Components MUST use Vue 3 Composition API with `<script setup>` syntax for all new development. The Composition API provides better TypeScript integration, logic reuse, and code organization. Options API is acceptable only for legacy integration or simple components. Use `ref` for primitive values, `reactive` for objects, and leverage composables for shared logic.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Nuxt 4 Full-Stack Framework
+The application MUST use Nuxt 4 as the primary framework for both frontend and backend operations. Leverage Nuxt's file-based routing, auto-imports, server-side rendering, and module system. Configure modules in `nuxt.config.ts` and utilize Nuxt's built-in features for optimal developer experience and performance.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. PrimeVue Component Library
+UI components MUST use PrimeVue as the primary component library. Configure PrimeVue through the `@primevue/nuxt-module` and utilize the comprehensive set of pre-built, accessible components. Customize themes using PrimeVue's theming system while maintaining consistency across the application.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Tailwind CSS Utility-First Styling
+All styling MUST use Tailwind CSS utility classes for rapid, consistent UI development. Follow the utility-first approach by composing styles directly in templates using Tailwind classes. Use `@apply` directive sparingly and only for complex, reusable component styles. Avoid custom CSS unless absolutely necessary.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### VI. KISS Principle (Keep It Simple, Stupid)
+Complexity MUST be justified and minimized. Prefer straightforward solutions over complex abstractions. Start simple and add complexity only when proven necessary. Avoid over-engineering and prioritize clarity and maintainability over clever implementations.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### VII. Code Quality Standards
+All code MUST pass ESLint and Prettier validation. Use TypeScript for type safety and better developer experience. Follow consistent naming conventions, proper error handling, and comprehensive testing. Maintain clean, readable code with meaningful variable and function names.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Technology Stack
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### Frontend Framework
+- **Vue 3**: Progressive JavaScript framework with Composition API
+- **Nuxt 4**: Full-stack Vue framework for SSR and backend operations
+- **TypeScript**: Type-safe JavaScript development
+
+### UI and Styling
+- **PrimeVue**: Comprehensive Vue component library
+- **Tailwind CSS**: Utility-first CSS framework
+- **@frontiers/prime-preset**: Custom PrimeVue theme preset
+
+### Development Tools
+- **ESLint**: Code linting and style enforcement
+- **Prettier**: Code formatting and consistency
+- **Vue DevTools**: Development and debugging support
+
+### Build and Deployment
+- **Vite**: Fast build tool and development server
+- **Node.js**: Runtime environment
+- **npm/pnpm**: Package management
+
+## Development Workflow
+
+### Code Organization
+- Use atomic design principles: atoms, molecules, organisms, templates
+- Implement single-file components with `<script setup>`
+- Organize code by feature, not by file type
+- Maintain clear separation between presentation and business logic
+
+### Component Development
+- Create reusable, composable components
+- Use TypeScript interfaces for prop definitions
+- Implement proper error boundaries and loading states
+- Follow accessibility guidelines (WCAG 2.1)
+
+### State Management
+- Use Vue 3's built-in reactivity system
+- Implement composables for shared state logic
+- Consider Pinia for complex state management needs
+- Avoid prop drilling through proper component architecture
+
+### Testing Strategy
+- Write unit tests for composables and utility functions
+- Implement component testing with Vue Test Utils
+- Use integration tests for critical user flows
+- Maintain high test coverage for business logic
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices and MUST be followed by all team members. Amendments require documentation of rationale, approval from technical leads, and migration plan for existing code. All pull requests and code reviews MUST verify compliance with these principles. Complexity additions MUST be justified with clear business value and technical necessity.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.1.0 | **Ratified**: 2025-01-27 | **Last Amended**: 2025-01-27
