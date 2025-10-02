@@ -6,3 +6,4 @@
   - Maybe we should default to powershell on mac and windows
 - A too complicated project makes speckit to give up
 - /Specify + Jira MCP 
+-- What is the Best Pratice to Use MCPs https://github.com/github/spec-kit/issues/488 
