@@ -83,7 +83,11 @@ function render() {
         plugins: {
           legend: {
             labels: {
-              color: getComputedStyle(document.documentElement).classList.contains('dark') ? '#e5e7eb' : '#111827',
+              color: getComputedStyle(
+                document.documentElement
+              ).classList.contains('dark')
+                ? '#e5e7eb'
+                : '#111827',
             },
           },
           tooltip: {
@@ -98,20 +102,36 @@ function render() {
           x: {
             display: true,
             ticks: {
-              color: getComputedStyle(document.documentElement).classList.contains('dark') ? '#d1d5db' : '#374151',
+              color: getComputedStyle(
+                document.documentElement
+              ).classList.contains('dark')
+                ? '#d1d5db'
+                : '#374151',
             },
             grid: {
-              color: getComputedStyle(document.documentElement).classList.contains('dark') ? 'rgba(75,85,99,0.3)' : 'rgba(229,231,235,1)',
+              color: getComputedStyle(
+                document.documentElement
+              ).classList.contains('dark')
+                ? 'rgba(75,85,99,0.3)'
+                : 'rgba(229,231,235,1)',
             },
           },
           y: {
             display: true,
             beginAtZero: true,
             ticks: {
-              color: getComputedStyle(document.documentElement).classList.contains('dark') ? '#d1d5db' : '#374151',
+              color: getComputedStyle(
+                document.documentElement
+              ).classList.contains('dark')
+                ? '#d1d5db'
+                : '#374151',
             },
             grid: {
-              color: getComputedStyle(document.documentElement).classList.contains('dark') ? 'rgba(75,85,99,0.3)' : 'rgba(229,231,235,1)',
+              color: getComputedStyle(
+                document.documentElement
+              ).classList.contains('dark')
+                ? 'rgba(75,85,99,0.3)'
+                : 'rgba(229,231,235,1)',
             },
           },
         },

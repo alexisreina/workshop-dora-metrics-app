@@ -1,8 +1,13 @@
 <template>
   <div class="flex flex-wrap items-end gap-2" data-testid="df-filters">
     <div>
-      <label class="block text-sm text-gray-700 dark:text-gray-200">Preset</label>
-      <select v-model="model.preset" class="p-inputtext p-component bg-white text-gray-900 border border-gray-300 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700">
+      <label class="block text-sm text-gray-700 dark:text-gray-200"
+        >Preset</label
+      >
+      <select
+        v-model="model.preset"
+        class="p-inputtext p-component border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+      >
         <option value="14d">14d</option>
         <option value="30d">30d</option>
         <option value="90d">90d</option>
@@ -11,33 +16,55 @@
       </select>
     </div>
     <div>
-      <label class="block text-sm text-gray-700 dark:text-gray-200">Grouping</label>
-      <select v-model="model.groupBy" class="p-inputtext p-component bg-white text-gray-900 border border-gray-300 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700">
+      <label class="block text-sm text-gray-700 dark:text-gray-200"
+        >Grouping</label
+      >
+      <select
+        v-model="model.groupBy"
+        class="p-inputtext p-component border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+      >
         <option value="day">day</option>
         <option value="week">week</option>
         <option value="month">month</option>
       </select>
     </div>
     <div>
-      <label class="block text-sm text-gray-700 dark:text-gray-200">Project</label>
-      <select v-model="model.project" class="p-inputtext p-component bg-white text-gray-900 border border-gray-300 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700">
+      <label class="block text-sm text-gray-700 dark:text-gray-200"
+        >Project</label
+      >
+      <select
+        v-model="model.project"
+        class="p-inputtext p-component border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+      >
         <option v-for="p in projects" :key="p" :value="p">{{ p }}</option>
       </select>
     </div>
     <div>
-      <label class="block text-sm text-gray-700 dark:text-gray-200">Repository</label>
-      <select v-model="model.repository" class="p-inputtext p-component bg-white text-gray-900 border border-gray-300 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700">
+      <label class="block text-sm text-gray-700 dark:text-gray-200"
+        >Repository</label
+      >
+      <select
+        v-model="model.repository"
+        class="p-inputtext p-component border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+      >
         <option v-for="r in repositories" :key="r" :value="r">{{ r }}</option>
       </select>
     </div>
     <div>
-      <label class="block text-sm text-gray-700 dark:text-gray-200">Environment</label>
-      <select v-model="model.environment" class="p-inputtext p-component bg-white text-gray-900 border border-gray-300 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700">
+      <label class="block text-sm text-gray-700 dark:text-gray-200"
+        >Environment</label
+      >
+      <select
+        v-model="model.environment"
+        class="p-inputtext p-component border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+      >
         <option v-for="e in environments" :key="e" :value="e">{{ e }}</option>
       </select>
     </div>
     <div v-if="model.groupBy === 'day'">
-      <label class="inline-flex items-center gap-2 text-gray-700 dark:text-gray-200">
+      <label
+        class="inline-flex items-center gap-2 text-gray-700 dark:text-gray-200"
+      >
         <input v-model="model.rollingAvg" type="checkbox" />
         <span>7d rolling avg</span>
       </label>
