@@ -8,8 +8,16 @@ export default defineEventHandler(async (event) => {
     // Mock navigation items (in a real app, this would come from a database)
     const navigationItems = [
       {
+        id: 'home',
+        label: 'Welcome',
+        route: '/',
+        isActive: currentRoute === '/',
+        isVisible: true,
+        order: 0,
+      },
+      {
         id: 'metrics-1',
-        label: 'Metrics 1',
+        label: 'Deployment Frequency',
         route: '/metrics/1',
         isActive: currentRoute === '/metrics/1',
         isVisible: true,
@@ -30,14 +38,6 @@ export default defineEventHandler(async (event) => {
         isActive: currentRoute === '/metrics/3',
         isVisible: true,
         order: 3,
-      },
-      {
-        id: 'home',
-        label: 'Welcome',
-        route: '/',
-        isActive: currentRoute === '/',
-        isVisible: true,
-        order: 0,
       },
     ];
 

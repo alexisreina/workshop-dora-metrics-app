@@ -1,0 +1,146 @@
+openapi: 3.0.3
+info:
+  title: Deployment Frequency (DF) Mock API
+  version: 0.1.0
+servers:
+  - url: http://localhost
+paths:
+  /api/df/series:
+    get:
+      summary: Get aggregated DF series
+      parameters:
+        - in: query
+          name: startDate
+          schema: { type: string, format: date }
+        - in: query
+          name: endDate
+          schema: { type: string, format: date }
+        - in: query
+          name: preset
+          schema: { type: string, enum: ['14d', '30d', '90d', '6m', 'custom'] }
+        - in: query
+          name: groupBy
+          schema: { type: string, enum: ['day', 'week', 'month'] }
+          required: true
+        - in: query
+          name: project
+          schema: { type: string }
+        - in: query
+          name: repository
+          schema: { type: string }
+        - in: query
+          name: environment
+          schema: { type: string }
+        - in: query
+          name: rollingAvg
+          schema: { type: boolean }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentSeries'
+  /api/df/summary:
+    get:
+      summary: Get DF summary for selection
+      parameters:
+        - in: query
+          name: startDate
+          schema: { type: string, format: date }
+        - in: query
+          name: endDate
+          schema: { type: string, format: date }
+        - in: query
+          name: preset
+          schema: { type: string, enum: ['14d', '30d', '90d', '6m', 'custom'] }
+        - in: query
+          name: groupBy
+          schema: { type: string, enum: ['day', 'week', 'month'] }
+          required: true
+        - in: query
+          name: project
+          schema: { type: string }
+        - in: query
+          name: repository
+          schema: { type: string }
+        - in: query
+          name: environment
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentSummary'
+  /api/df/events:
+    get:
+      summary: Get raw deployment events
+      parameters:
+        - in: query
+          name: startDate
+          schema: { type: string, format: date }
+        - in: query
+          name: endDate
+          schema: { type: string, format: date }
+        - in: query
+          name: preset
+          schema: { type: string, enum: ['14d', '30d', '90d', '6m', 'custom'] }
+        - in: query
+          name: project
+          schema: { type: string }
+        - in: query
+          name: repository
+          schema: { type: string }
+        - in: query
+          name: environment
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeploymentEvent'
+components:
+  schemas:
+    DeploymentEvent:
+      type: object
+      properties:
+        id: { type: string }
+        timestamp: { type: string, format: date-time }
+        project: { type: string }
+        repository: { type: string }
+        environment: { type: string }
+        status: { type: string, enum: [success, failure] }
+        notes: { type: string }
+    DeploymentSeries:
+      type: object
+      properties:
+        grouping: { type: string, enum: [day, week, month] }
+        buckets:
+          type: array
+          items:
+            type: object
+            properties:
+              label: { type: string }
+              start: { type: string, format: date-time }
+              end: { type: string, format: date-time }
+              count: { type: integer }
+        rollingAverage:
+          type: array
+          items:
+            type: object
+            properties:
+              label: { type: string }
+              value: { type: number }
+    DeploymentSummary:
+      type: object
+      properties:
+        totalProductionSuccesses: { type: integer }
+        averagePerBucket: { type: number }
+        previousPeriodDelta: { type: number }
+        previousPeriodPercentChange: { type: number }
