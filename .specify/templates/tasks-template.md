@@ -53,28 +53,31 @@
 - [ ] T005 [P] Contract test GET /api/users/{id} in tests/contract/test_users_get.py
 - [ ] T006 [P] Integration test user registration in tests/integration/test_registration.py
 - [ ] T007 [P] Integration test auth flow in tests/integration/test_auth.py
+- [ ] T008 Verify telemetry instrumentation for new flows in tests/integration/test_telemetry.py
 
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
-- [ ] T008 [P] User model in src/models/user.py
-- [ ] T009 [P] UserService CRUD in src/services/user_service.py
-- [ ] T010 [P] CLI --create-user in src/cli/user_commands.py
-- [ ] T011 POST /api/users endpoint
-- [ ] T012 GET /api/users/{id} endpoint
-- [ ] T013 Input validation
-- [ ] T014 Error handling and logging
+- [ ] T009 [P] User model in src/models/user.py
+- [ ] T010 [P] UserService CRUD in src/services/user_service.py
+- [ ] T011 [P] CLI --create-user in src/cli/user_commands.py
+- [ ] T012 POST /api/users endpoint
+- [ ] T013 GET /api/users/{id} endpoint
+- [ ] T014 Input validation
+- [ ] T015 Error handling and logging
+- [ ] T016 Ensure views reuse shared Nuxt/PrimeVue components
 
 ## Phase 3.4: Integration
-- [ ] T015 Connect UserService to DB
-- [ ] T016 Auth middleware
-- [ ] T017 Request/response logging
-- [ ] T018 CORS and security headers
+- [ ] T017 Connect UserService to DB with auditable data pipeline hooks
+- [ ] T018 Auth middleware
+- [ ] T019 Request/response logging
+- [ ] T020 CORS and security headers
+- [ ] T021 Add DORA dashboard updates for new metrics
 
 ## Phase 3.5: Polish
-- [ ] T019 [P] Unit tests for validation in tests/unit/test_validation.py
-- [ ] T020 Performance tests (<200ms)
-- [ ] T021 [P] Update docs/api.md
-- [ ] T022 Remove duplication
-- [ ] T023 Run manual-testing.md
+- [ ] T022 [P] Unit tests for validation in tests/unit/test_validation.py
+- [ ] T023 Performance tests (<2s render, ≤150ms interaction)
+- [ ] T024 [P] Update docs/api.md with accessibility notes and data caveats
+- [ ] T025 Remove duplication and dead code
+- [ ] T026 Run manual-testing.md with accessibility checklist
 
 ## Dependencies
 - Tests (T004-T007) before implementation (T008-T014)
@@ -124,4 +127,4 @@ Task: "Integration test auth in tests/integration/test_auth.py"
 - [ ] All tests come before implementation
 - [ ] Parallel tasks truly independent
 - [ ] Each task specifies exact file path
-- [ ] No task modifies same file as another [P] task
+- [ ] Accessibility, observability, and configuration updates are represented

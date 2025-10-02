@@ -1,0 +1,134 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Active Jira Tickets API",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/jira/active-tickets": {
+      "get": {
+        "summary": "List active Jira tickets for the current user",
+        "description": "Returns cached or freshly fetched Jira tickets assigned to the authenticated user using JQL `assignee = currentUser() AND statusCategory != Done`.",
+        "responses": {
+          "200": {
+            "description": "Active tickets returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JiraTicketListResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication to Jira failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Jira rate limit exceeded",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds to wait before retrying",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "JiraTicketListResult": {
+        "type": "object",
+        "required": [
+          "tickets",
+          "fetchedAt",
+          "cacheTtlSeconds",
+          "source"
+        ],
+        "properties": {
+          "tickets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JiraIssueSummary"
+            }
+          },
+          "fetchedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cacheTtlSeconds": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "source": {
+            "type": "string",
+            "enum": ["jira-live", "jira-cache"]
+          }
+        }
+      },
+      "JiraIssueSummary": {
+        "type": "object",
+        "required": ["key", "summary"],
+        "properties": {
+          "key": {
+            "type": "string",
+            "example": "PROJ-123"
+          },
+          "summary": {
+            "type": "string",
+            "example": "Fix deployment pipeline warning"
+          },
+          "status": {
+            "type": "string",
+            "example": "In Progress"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": ["message"],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  }
+}

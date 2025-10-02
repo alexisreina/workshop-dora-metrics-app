@@ -47,7 +47,11 @@
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- **Metric Integrity First**: Document authoritative data sources, validation strategy, and regression-test updates for any new or changed metric outputs.
+- **Accessible Insight Delivery**: Capture accessibility/performance acceptance criteria (WCAG 2.2 AA, <2s render) and list planned UI telemetry for the feature.
+- **Test-Led Iteration**: Enumerate failing tests to author before implementation (unit, component, E2E) and CI updates required.
+- **Operational Transparency**: Outline observability additions (analytics events, error/perf logging, DORA dashboards) and owners.
+- **Deliberate Simplicity & Reuse**: Confirm reuse of shared Nuxt/PrimeVue primitives, removal of obsolete code, and adherence to centralized configuration patterns.
 
 ## Project Structure
 
@@ -216,4 +220,4 @@ directories captured above]
 - [ ] Complexity deviations documented
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+*Based on Constitution v1.0.0 - See `/memory/constitution.md`*

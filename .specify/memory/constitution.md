@@ -1,50 +1,54 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+Version change: 0.0.0 → 1.0.0
+Modified principles: Initial adoption (no prior titles)
+Added sections: Core Principles; Engineering Guardrails; Workflow Expectations; Governance
+Removed sections: none
+Templates requiring updates:
+- ✅ .specify/templates/plan-template.md
+- ✅ .specify/templates/tasks-template.md
+Follow-up TODOs: none
+-->
+# Workshop DORA Metrics App Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Metric Integrity First
+Metric calculations MUST be reproducible, sourced from auditable data pipelines, and validated against authoritative systems of record before exposure. Every visualization MUST describe its data freshness, filters, and known caveats inline.
+Rationale: DORA guidance depends on trustworthy numbers; any degradation in data accuracy erodes confidence in the entire product.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Accessible Insight Delivery
+The user interface MUST meet WCAG 2.2 AA contrast and keyboard navigation requirements, render critical views within 2 seconds on reference hardware, and remain usable without JavaScript enhancements. All graphs MUST include descriptive text summaries for screen reader users.
+Rationale: Leaders act on these metrics under time pressure; inclusivity and responsiveness ensure decisions are never blocked by the tooling.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Test-Led Iteration
+Teams MUST create failing unit, component, and end-to-end tests that describe desired behavior before shipping features or fixes. CI MUST block merges unless the test suite passes on the target branch and captures regression coverage for newly added metrics.
+Rationale: Testing guards metric integrity and protects the cadence needed to improve DORA performance.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Operational Transparency
+Instrumentation for usage analytics, error logging, and performance baselines MUST be added alongside new functionality. Dashboards MUST surface release health, lead time, deployment frequency, and change failure rate within one iteration of feature launch.
+Rationale: Observability makes it possible to detect regressions quickly and demonstrate DORA improvements to stakeholders.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Deliberate Simplicity & Reuse
+Implementations MUST favor vetted Nuxt, PrimeVue, and shared component patterns over bespoke solutions. Cross-cutting concerns (layout, theming, telemetry) MUST be centralized, and dead code MUST be removed within the current iteration.
+Rationale: Consistency keeps the front-end maintainable and lets the team focus on metric quality instead of plumbing.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Engineering Guardrails
+- Primary stack: Nuxt 4 + PrimeVue 4; deviations require explicit review and proof of necessity.
+- Data interactions MUST traverse typed client services; direct fetch calls in views are prohibited.
+- Configuration values related to data sources, environments, and feature flags MUST reside in a single configuration registry under version control.
+- Performance budgets: Largest Contentful Paint ≤ 2.0 s, interaction latency ≤ 150 ms, bundle size budgets documented per route.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Workflow Expectations
+- Feature work begins with a `/specs/.../spec.md` that references the applicable principles and outlines Constitution Check considerations.
+- Pull requests MUST cite the impacted principles, list new or updated tests, and link telemetry or monitoring adjustments when applicable.
+- Code review CHECKLISTS MUST include verification of data validation, accessibility, and instrumentation updates.
+- Release notes MUST summarize DORA metric impacts and flag follow-up instrumentation tasks.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+- The Constitution supersedes conflicting team conventions. Compliance is evaluated during plan reviews, code reviews, and release readiness checks.
+- Amendments require consensus of tech lead and product owner, documented rationale, updated version number, and execution of impacted migration tasks.
+- Versioning follows semantic rules: MAJOR for removals or incompatible rewrites, MINOR for new principles or mandatory processes, PATCH for clarifications.
+- Compliance reviews run quarterly; non-compliance issues must enter the backlog with clear owners and due dates.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-10-01 | **Last Amended**: 2025-10-01

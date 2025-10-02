@@ -1,0 +1,24 @@
+# workshop-dora-metrics-app Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2025-10-01
+
+## Active Technologies
+- TypeScript (Nuxt 4.1.2 runtime) + Nuxt 4, PrimeVue 4, @frontiers/prime-preset, ofetch/$fetch, Atlassian Jira REST API (OAuth 2.0) (001-i-wish-to)
+
+## Project Structure
+```
+src/
+tests/
+```
+
+## Commands
+npm test [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECHNOLOGIES] npm run lint
+
+## Code Style
+TypeScript (Nuxt 4.1.2 runtime): Follow standard conventions
+
+## Recent Changes
+- 001-i-wish-to: Added TypeScript (Nuxt 4.1.2 runtime) + Nuxt 4, PrimeVue 4, @frontiers/prime-preset, ofetch/$fetch, Atlassian Jira REST API (OAuth 2.0)
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->
