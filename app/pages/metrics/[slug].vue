@@ -16,7 +16,27 @@
       </div>
 
       <!-- Metrics Content -->
+      <div v-if="isDeploymentFrequency" class="space-y-4 p-4">
+        <DFFilters v-model="selection" />
+
+        <div class="grid gap-4 md:grid-cols-3">
+          <div
+            class="rounded bg-white p-4 shadow md:col-span-2 dark:bg-gray-900"
+          >
+            <DFChart :series="series" />
+          </div>
+          <div class="rounded bg-white p-4 shadow dark:bg-gray-900">
+            <DFSummary :summary="summary" />
+          </div>
+        </div>
+
+        <div class="rounded bg-white p-4 shadow dark:bg-gray-900">
+          <DFEventsTable :events="events" />
+        </div>
+      </div>
+
       <div
+        v-else
         class="rounded-lg border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-700 dark:bg-gray-800"
       >
         <div class="text-center">
@@ -75,16 +95,56 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import DefaultLayout from '~/components/templates/DefaultLayout.vue';
+import { computed, reactive, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import { useHead } from '@unhead/vue';
+import { useDeploymentFrequency } from '../../composables/df/useDeploymentFrequency';
 
 // Get route parameters
 const route = useRoute();
-const slug = route.params.slug as string;
+const slug = computed(() => route.params.slug as string);
+
+const isDeploymentFrequency = computed(() => slug.value === '1');
+
+// DF state and loading
+const { fetchSeries, fetchSummary, fetchEvents } = useDeploymentFrequency();
+const selection = reactive({
+  preset: '6m',
+  groupBy: 'day',
+  startDate: undefined as string | undefined,
+  endDate: undefined as string | undefined,
+  project: 'All' as string | undefined,
+  repository: 'All' as string | undefined,
+  environment: 'All' as string | undefined,
+  rollingAvg: false,
+});
+
+const series = ref(null as any);
+const summary = ref(null as any);
+const events = ref([] as any[]);
+
+async function loadDf() {
+  if (!isDeploymentFrequency.value) return;
+  series.value = await fetchSeries(selection as any);
+  summary.value = await fetchSummary(selection as any);
+  events.value = await fetchEvents(selection as any);
+}
+
+watch(selection, () => {
+  loadDf();
+});
+
+watch(
+  () => isDeploymentFrequency.value,
+  (now) => {
+    if (now) loadDf();
+  },
+  { immediate: true }
+);
 
 // Page metadata based on slug
 const pageTitle = computed(() => {
-  switch (slug) {
+  switch (slug.value) {
     case '1':
       return 'Deployment Frequency';
     case '2':
@@ -94,12 +154,12 @@ const pageTitle = computed(() => {
     case '4':
       return 'Change Failure Rate';
     default:
-      return `Metrics ${slug}`;
+      return `Metrics ${slug.value}`;
   }
 });
 
 const pageDescription = computed(() => {
-  switch (slug) {
+  switch (slug.value) {
     case '1':
       return 'Track how often your team deploys code to production or releases to end users.';
     case '2':
