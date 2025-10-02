@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: DORA Metrics Navigation API
+  description: API for navigation layout and routing
+  version: 1.0.0
+  contact:
+    name: DORA Metrics Team
+    email: team@dorametrics.com
+
+servers:
+  - url: http://localhost:3000/api
+    description: Development server
+
+paths:
+  /navigation:
+    get:
+      summary: Get navigation items
+      description: Retrieve all navigation items for the sidebar
+      operationId: getNavigationItems
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/NavigationItem'
+                  currentRoute:
+                    type: string
+                    example: '/'
+                  isMobile:
+                    type: boolean
+                    example: false
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /navigation/{id}:
+    get:
+      summary: Get navigation item by ID
+      description: Retrieve a specific navigation item
+      operationId: getNavigationItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 'metrics-1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NavigationItem'
+        '404':
+          description: Navigation item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /navigation/state:
+    post:
+      summary: Update navigation state
+      description: Update the current navigation state
+      operationId: updateNavigationState
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NavigationStateUpdate'
+      responses:
+        '200':
+          description: State updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NavigationState'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    NavigationItem:
+      type: object
+      required:
+        - id
+        - label
+        - route
+        - isActive
+        - isVisible
+        - order
+      properties:
+        id:
+          type: string
+          example: 'metrics-1'
+        label:
+          type: string
+          example: 'Metrics 1'
+        route:
+          type: string
+          example: '/metrics/1'
+        isActive:
+          type: boolean
+          example: false
+        isVisible:
+          type: boolean
+          example: true
+        order:
+          type: integer
+          minimum: 0
+          example: 1
+
+    NavigationState:
+      type: object
+      required:
+        - currentRoute
+        - isSidebarOpen
+        - isMobile
+        - navigationItems
+      properties:
+        currentRoute:
+          type: string
+          example: '/'
+        isSidebarOpen:
+          type: boolean
+          example: false
+        isMobile:
+          type: boolean
+          example: false
+        navigationItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/NavigationItem'
+
+    NavigationStateUpdate:
+      type: object
+      properties:
+        currentRoute:
+          type: string
+          example: '/metrics/1'
+        isSidebarOpen:
+          type: boolean
+          example: true
+        isMobile:
+          type: boolean
+          example: true
+
+    Error:
+      type: object
+      required:
+        - message
+        - code
+      properties:
+        message:
+          type: string
+          example: 'Navigation item not found'
+        code:
+          type: string
+          example: 'NAVIGATION_NOT_FOUND'
+        details:
+          type: string
+          example: 'The requested navigation item does not exist'

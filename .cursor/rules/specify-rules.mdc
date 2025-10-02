@@ -1,0 +1,63 @@
+# Workshop DORA Metrics App Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2025-10-01
+
+## Active Technologies
+- **Vue 3**: Composition API with `<script setup>` syntax
+- **Nuxt 4**: Full-stack framework for SSR and backend operations
+- **PrimeVue**: UI component library with comprehensive components
+- **Tailwind CSS**: Utility-first CSS framework
+- **TypeScript**: Type-safe development
+- **ESLint & Prettier**: Code quality and formatting
+
+## Project Structure
+```
+app/
+├── components/
+│   ├── atoms/          # Basic UI elements
+│   ├── molecules/      # Simple component combinations
+│   ├── organisms/      # Complex UI sections
+│   └── templates/      # Page layouts
+├── pages/              # File-based routing
+├── composables/        # Shared reactive logic
+├── middleware/         # Route middleware
+├── plugins/           # Vue plugins
+├── server/
+│   ├── api/           # API routes
+│   └── middleware/    # Server middleware
+└── utils/             # Utility functions
+
+src/
+├── components/        # Additional components
+├── pages/             # Additional pages
+├── styles/            # Global styles
+├── test/              # Test utilities
+└── utils/             # Additional utilities
+
+tests/
+├── unit/              # Unit tests
+├── integration/       # Integration tests
+└── e2e/               # End-to-end tests
+```
+
+## Commands
+- **Development**: `npm run dev` - Start Nuxt dev server
+- **Build**: `npm run build` - Build for production
+- **Preview**: `npm run preview` - Preview production build
+- **Lint**: `npm run lint` - Run ESLint
+- **Format**: `npm run format` - Run Prettier
+- **Type Check**: `npx nuxi typecheck` - TypeScript validation
+
+## Code Style
+- **Vue Components**: Use `<script setup>` with Composition API
+- **TypeScript**: Strict mode enabled, explicit types preferred
+- **Styling**: Tailwind utility classes, minimal custom CSS
+- **Components**: Atomic design principles (atoms → molecules → organisms → templates)
+- **Composables**: Shared reactive logic, single responsibility
+- **Naming**: PascalCase for components, camelCase for composables and utilities
+
+## Recent Changes
+- 001-build-a-top: Added TypeScript 5.x, Vue 3.5+ + Nuxt 4, PrimeVue 4.4, Tailwind CSS 4.x, @frontiers/prime-prese
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->

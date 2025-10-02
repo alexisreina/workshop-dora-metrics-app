@@ -1,14 +1,7 @@
-<script setup lang="ts">
-import { Button } from 'primevue';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="font-sans">
-    <Button label="Click" rounded />
-    <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+    <NuxtPage />
   </div>
 </template>
-
-
