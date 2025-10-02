@@ -1,9 +1,0 @@
-# Notes for Presentation
-
-- Every specify will create a new branch
-- Always open a new context tab in cursor for each step to avoid context
-- Configuring running a project in windows that was created in mac is not easy
-  - Maybe we should default to powershell on mac and windows
-- A too complicated project makes speckit to give up
-- /Specify + Jira MCP 
--- What is the Best Pratice to Use MCPs https://github.com/github/spec-kit/issues/488 
