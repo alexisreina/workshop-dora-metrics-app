@@ -34,4 +34,6 @@ logs
 /.vs/workshop-dora-metrics-app/CopilotIndices/17.14.1204.46620
 *.vsidx
 *.sqlite
-/.cursor/commands/analyze.md
+.vs/VSWorkspaceState.json
+.vs/workshop-dora-metrics-app/v17/.wsuo
+.vs/workshop-dora-metrics-app/v17/DocumentLayout.json
