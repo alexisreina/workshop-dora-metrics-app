@@ -25,3 +25,13 @@ logs
 .specify/scripts/powershell/**
 .specify/scripts/bash/**
 .cursor/commands/**
+/.cursor/commands/analyze.md
+/.cursor/commands/clarify.md
+/.cursor/commands/implement.md
+/.cursor/commands/plan.md
+/.cursor/commands/specify.md
+/.cursor/commands/tasks.md
+/.vs/workshop-dora-metrics-app/CopilotIndices/17.14.1204.46620
+*.vsidx
+*.sqlite
+/.cursor/commands/analyze.md
