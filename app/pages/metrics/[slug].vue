@@ -20,15 +20,15 @@
         <DFFilters v-model="selection" />
 
         <div class="grid gap-4 md:grid-cols-3">
-          <div class="rounded bg-white p-4 shadow md:col-span-2">
+          <div class="rounded bg-white p-4 shadow dark:bg-gray-900 md:col-span-2">
             <DFChart :series="series" />
           </div>
-          <div class="rounded bg-white p-4 shadow">
+          <div class="rounded bg-white p-4 shadow dark:bg-gray-900">
             <DFSummary :summary="summary" />
           </div>
         </div>
 
-        <div class="rounded bg-white p-4 shadow">
+        <div class="rounded bg-white p-4 shadow dark:bg-gray-900">
           <DFEventsTable :events="events" />
         </div>
       </div>
