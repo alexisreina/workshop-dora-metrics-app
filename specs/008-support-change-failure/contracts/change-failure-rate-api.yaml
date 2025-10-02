@@ -5,7 +5,7 @@ info:
   version: 1.0.0
   contact:
     name: DORA Metrics App
-    
+
 servers:
   - url: /api/metrics/change-failure-rate
     description: Change Failure Rate API endpoints
@@ -311,34 +311,34 @@ components:
           value: 15
           totalDeployments: 100
           failedDeployments: 15
-          calculatedAt: "2025-10-02T10:30:00Z"
+          calculatedAt: '2025-10-02T10:30:00Z'
         period:
-          startDate: "2025-09-02"
-          endDate: "2025-10-02"
-          type: "monthly"
-          label: "Last 30 days"
-        dataQuality: "complete"
-        lastUpdated: "2025-10-02T10:30:00Z"
+          startDate: '2025-09-02'
+          endDate: '2025-10-02'
+          type: 'monthly'
+          label: 'Last 30 days'
+        dataQuality: 'complete'
+        lastUpdated: '2025-10-02T10:30:00Z'
 
     BenchmarkExample:
       summary: Example benchmark response
       value:
         benchmarks:
-          - category: "elite"
+          - category: 'elite'
             minValue: 0
             maxValue: 5
-            description: "Elite performers have very low failure rates"
-          - category: "high"
+            description: 'Elite performers have very low failure rates'
+          - category: 'high'
             minValue: 6
             maxValue: 10
-            description: "High performers maintain good deployment quality"
-          - category: "medium"
+            description: 'High performers maintain good deployment quality'
+          - category: 'medium'
             minValue: 11
             maxValue: 20
-            description: "Medium performers have moderate failure rates"
-          - category: "low"
+            description: 'Medium performers have moderate failure rates'
+          - category: 'low'
             minValue: 21
             maxValue: 100
-            description: "Low performers experience frequent deployment failures"
-        source: "DORA State of DevOps Report 2023"
-        lastUpdated: "2023-10-01"
+            description: 'Low performers experience frequent deployment failures'
+        source: 'DORA State of DevOps Report 2023'
+        lastUpdated: '2023-10-01'

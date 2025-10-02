@@ -1,10 +1,10 @@
-
 # Implementation Plan: Support "Change Failure Rate" DORA Metric
 
 **Branch**: `008-support-change-failure` | **Date**: 2025-10-02 | **Spec**: [spec.md](./spec.md)
 **Input**: Feature specification from `/specs/008-support-change-failure/spec.md`
 
 ## Execution Flow (/plan command scope)
+
 ```
 1. Load feature spec from Input path
    → If not found: ERROR "No feature spec at {path}"
@@ -27,13 +27,16 @@
 ```
 
 **IMPORTANT**: The /plan command STOPS at step 7. Phases 2-4 are executed by other commands:
+
 - Phase 2: /tasks command creates tasks.md
 - Phase 3-4: Implementation execution (manual or via tools)
 
 ## Summary
+
 Add Change Failure Rate DORA metric support to the existing DORA Metrics application. This includes creating a dedicated page accessible via navigation that displays the Change Failure Rate as a percentage, shows historical trends over configurable time periods, and provides comparison against industry benchmarks. The system will automatically detect deployment failures through monitoring alerts within 24 hours and display the metric with appropriate context and explanations.
 
 ## Technical Context
+
 **Language/Version**: TypeScript with Vue 3 Composition API, Node.js runtime  
 **Primary Dependencies**: Nuxt 4, PrimeVue component library, Tailwind CSS, Vitest for testing  
 **Storage**: File-based data storage (JSON/API simulation), no database required for current scope  
@@ -45,7 +48,8 @@ Add Change Failure Rate DORA metric support to the existing DORA Metrics applica
 **Scale/Scope**: Single metric page with historical data visualization, ~5-10 new components
 
 ## Constitution Check
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
 **SOLID Principles Compliance**: ✅ PASS - Single responsibility components, dependency injection via composables  
 **Vue 3 Composition API First**: ✅ PASS - All new components will use `<script setup>` syntax  
@@ -53,14 +57,15 @@ Add Change Failure Rate DORA metric support to the existing DORA Metrics applica
 **PrimeVue Component Library**: ✅ PASS - Using PrimeVue components for consistent UI  
 **Tailwind CSS Utility-First**: ✅ PASS - All styling via Tailwind utility classes  
 **KISS Principle**: ✅ PASS - Simple metric display page, no over-engineering  
-**Code Quality Standards**: ✅ PASS - TypeScript, ESLint, Prettier validation required  
+**Code Quality Standards**: ✅ PASS - TypeScript, ESLint, Prettier validation required
 
 **Atomic Design Compliance**: ✅ PASS - Following existing atoms/molecules/organisms structure  
-**Testing Strategy**: ✅ PASS - Unit tests for composables, integration tests for user flows  
+**Testing Strategy**: ✅ PASS - Unit tests for composables, integration tests for user flows
 
 **Overall Assessment**: All constitutional principles can be followed without violations.
 
 **Post-Design Re-evaluation**: ✅ PASS - Design artifacts maintain constitutional compliance:
+
 - Data model follows SOLID principles with clear entity separation
 - API contracts use standard REST patterns (KISS principle)
 - Component structure follows atomic design (existing pattern)
@@ -70,6 +75,7 @@ Add Change Failure Rate DORA metric support to the existing DORA Metrics applica
 ## Project Structure
 
 ### Documentation (this feature)
+
 ```
 specs/[###-feature]/
 ├── plan.md              # This file (/plan command output)
@@ -81,6 +87,7 @@ specs/[###-feature]/
 ```
 
 ### Source Code (repository root)
+
 ```
 app/
 ├── components/
@@ -107,12 +114,14 @@ tests/
 **Structure Decision**: Nuxt 4 full-stack web application structure selected. The existing atomic design pattern (atoms/molecules/organisms/templates) will be extended with new Change Failure Rate components. API routes will be added under `server/api/metrics/` following the existing pattern.
 
 ## Phase 0: Outline & Research
+
 1. **Extract unknowns from Technical Context** above:
    - For each NEEDS CLARIFICATION → research task
    - For each dependency → best practices task
    - For each integration → patterns task
 
 2. **Generate and dispatch research agents**:
+
    ```
    For each unknown in Technical Context:
      Task: "Research {unknown} for {feature context}"
@@ -128,7 +137,8 @@ tests/
 **Output**: research.md with all NEEDS CLARIFICATION resolved
 
 ## Phase 1: Design & Contracts
-*Prerequisites: research.md complete*
+
+_Prerequisites: research.md complete_
 
 1. **Extract entities from feature spec** → `data-model.md`:
    - Entity name, fields, relationships
@@ -158,12 +168,14 @@ tests/
    - Keep under 150 lines for token efficiency
    - Output to repository root
 
-**Output**: data-model.md, /contracts/*, failing tests, quickstart.md, agent-specific file
+**Output**: data-model.md, /contracts/\*, failing tests, quickstart.md, agent-specific file
 
 ## Phase 2: Task Planning Approach
-*This section describes what the /tasks command will do - DO NOT execute during /plan*
+
+_This section describes what the /tasks command will do - DO NOT execute during /plan_
 
 **Task Generation Strategy**:
+
 - Load `.specify/templates/tasks-template.md` as base
 - Generate tasks from Phase 1 design docs (contracts, data model, quickstart)
 - API contract endpoints → contract test tasks [P]
@@ -173,9 +185,10 @@ tests/
 - Implementation tasks to make tests pass
 
 **Specific Task Categories**:
+
 1. **Contract Tests** (Parallel):
    - Test `/api/metrics/change-failure-rate/` endpoint
-   - Test `/api/metrics/change-failure-rate/historical` endpoint  
+   - Test `/api/metrics/change-failure-rate/historical` endpoint
    - Test `/api/metrics/change-failure-rate/benchmarks` endpoint
 
 2. **Type Definitions** (Parallel):
@@ -209,6 +222,7 @@ tests/
    - Contract test validation
 
 **Ordering Strategy**:
+
 - TDD order: Contract tests → API implementation → Component tests → UI components
 - Dependency order: Types → API → Composables → Components → Page → Navigation
 - Mark [P] for parallel execution (independent files)
@@ -218,25 +232,28 @@ tests/
 **IMPORTANT**: This phase is executed by the /tasks command, NOT by /plan
 
 ## Phase 3+: Future Implementation
-*These phases are beyond the scope of the /plan command*
+
+_These phases are beyond the scope of the /plan command_
 
 **Phase 3**: Task execution (/tasks command creates tasks.md)  
 **Phase 4**: Implementation (execute tasks.md following constitutional principles)  
 **Phase 5**: Validation (run tests, execute quickstart.md, performance validation)
 
 ## Complexity Tracking
-*Fill ONLY if Constitution Check has violations that must be justified*
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+_Fill ONLY if Constitution Check has violations that must be justified_
 
+| Violation                  | Why Needed         | Simpler Alternative Rejected Because |
+| -------------------------- | ------------------ | ------------------------------------ |
+| [e.g., 4th project]        | [current need]     | [why 3 projects insufficient]        |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient]  |
 
 ## Progress Tracking
-*This checklist is updated during execution flow*
+
+_This checklist is updated during execution flow_
 
 **Phase Status**:
+
 - [x] Phase 0: Research complete (/plan command)
 - [x] Phase 1: Design complete (/plan command)
 - [x] Phase 2: Task planning complete (/plan command - describe approach only)
@@ -245,10 +262,12 @@ tests/
 - [ ] Phase 5: Validation passed
 
 **Gate Status**:
+
 - [x] Initial Constitution Check: PASS
 - [x] Post-Design Constitution Check: PASS
 - [x] All NEEDS CLARIFICATION resolved
 - [x] Complexity deviations documented (none required)
 
 ---
-*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
+
+_Based on Constitution v2.1.1 - See `/memory/constitution.md`_
