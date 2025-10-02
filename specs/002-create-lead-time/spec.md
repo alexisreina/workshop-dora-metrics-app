@@ -36,6 +36,17 @@
 
 ---
 
+## Clarifications
+
+### Session 2025-10-02
+- Q: What is the expected data refresh frequency for the Lead Time metric display? → A: Manual refresh (user-triggered updates only)
+- Q: What is the maximum historical time range that should be displayed in the trend visualization? → A: Last 90 days (3 months)
+- Q: What should happen when there is insufficient historical data to calculate a meaningful DORA classification? → A: Show "Insufficient Data" badge with neutral color
+- Q: What unit of measurement should be used for displaying lead time values? → A: weeks
+- Q: What performance target should be considered acceptable for page load time? → A: 30 seconds
+
+---
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### Primary User Story
@@ -53,6 +64,7 @@ As a development team member or engineering manager, I want to view the Lead Tim
 - What happens when metric data is loading or unavailable?
 - How does the page handle very large or very small lead time values?
 - What occurs when there's insufficient historical data for trend visualization?
+- System displays "Insufficient Data" badge when unable to calculate meaningful DORA classification
 
 ## Requirements *(mandatory)*
 
@@ -62,19 +74,23 @@ As a development team member or engineering manager, I want to view the Lead Tim
 - **FR-003**: System MUST present the current lead time value in a visually prominent manner with large, bold typography
 - **FR-004**: System MUST clearly indicate the time window or context for the displayed metric (e.g., "Last 30 days")
 - **FR-005**: System MUST display the metric value within a card or panel design with visual emphasis
-- **FR-006**: System MUST include a line chart visualization showing lead time trends over time
-- **FR-007**: System MUST provide proper axis labels for the trend chart ("Date", "Lead Time (days/hours)")
-- **FR-008**: System MUST display a DORA classification badge or tag (Elite, High, Medium, Low)
+- **FR-006**: System MUST include a line chart visualization showing lead time trends over the last 90 days
+- **FR-007**: System MUST provide proper axis labels for the trend chart ("Date", "Lead Time (weeks)")
+- **FR-008**: System MUST display a DORA classification badge or tag (Elite, High, Medium, Low, or "Insufficient Data" with neutral color when data is inadequate)
 - **FR-009**: System MUST use color-coded indicators for performance classification that follow accessibility guidelines
 - **FR-010**: System MUST include an observation/insight section with explanatory text about performance
 - **FR-011**: System MUST adapt responsively to different screen sizes
 - **FR-012**: System MUST stack sections vertically on mobile devices while maintaining readability
 - **FR-013**: System MUST use appropriate loading states or placeholders when data is not available
+- **FR-016**: System MUST provide a manual refresh mechanism for users to update metric data on demand
 - **FR-014**: System MUST maintain visual hierarchy with proper spacing and contrast
 - **FR-015**: System MUST separate each section with appropriate padding and margins
 
+### Non-Functional Requirements
+- **NFR-001**: System MUST load the initial page within 30 seconds under normal network conditions
+
 ### Key Entities *(include if feature involves data)*
-- **Lead Time Metric**: Represents the current lead time value with associated time window and unit of measurement
+- **Lead Time Metric**: Represents the current lead time value in weeks with associated time window and measurement context
 - **Trend Data**: Historical lead time measurements over time for visualization purposes
 - **DORA Classification**: Performance benchmark category (Elite, High, Medium, Low) with associated color coding and criteria
 - **Insight Data**: Contextual information and explanatory text about current performance and trends

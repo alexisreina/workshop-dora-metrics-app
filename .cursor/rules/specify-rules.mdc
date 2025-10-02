@@ -9,6 +9,8 @@ Auto-generated from all feature plans. Last updated: 2025-10-01
 - **Tailwind CSS**: Utility-first CSS framework
 - **TypeScript**: Type-safe development
 - **ESLint & Prettier**: Code quality and formatting
+- TypeScript with Vue 3 Composition API, Nuxt 4 framework + Nuxt 4, PrimeVue (@primevue/nuxt-module), Tailwind CSS, Chart.js/D3.js for visualization (002-create-lead-time)
+- Mock data for initial implementation, future API integration planned (002-create-lead-time)
 
 ## Project Structure
 ```
@@ -57,6 +59,8 @@ tests/
 - **Naming**: PascalCase for components, camelCase for composables and utilities
 
 ## Recent Changes
+- 002-create-lead-time: Added TypeScript with Vue 3 Composition API, Nuxt 4 framework + Nuxt 4, PrimeVue (@primevue/nuxt-module), Tailwind CSS, Chart.js/D3.js for visualization
+- 002-create-lead-time: Added TypeScript with Vue 3 Composition API, Nuxt 4 framework + Nuxt 4, PrimeVue (@primevue/nuxt-module), Tailwind CSS, Chart.js/D3.js for visualization
 - 001-build-a-top: Added TypeScript 5.x, Vue 3.5+ + Nuxt 4, PrimeVue 4.4, Tailwind CSS 4.x, @frontiers/prime-prese
 
 <!-- MANUAL ADDITIONS START -->
