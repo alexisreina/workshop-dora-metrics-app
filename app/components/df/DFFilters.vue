@@ -38,7 +38,7 @@
     </div>
     <div v-if="model.groupBy === 'day'">
       <label class="inline-flex items-center gap-2">
-        <input v-model="model.rollingAvg" type="checkbox" >
+        <input v-model="model.rollingAvg" type="checkbox" />
         <span>7d rolling avg</span>
       </label>
     </div>
