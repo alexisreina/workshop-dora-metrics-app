@@ -1,0 +1,6 @@
+notes for presentation:
+
+- every specify will create a new branch
+- always open a new context tab in cursor for each step to avoid context
+- configuring running a porject in windows that was created in mac is not easy
+- a too complicated project makes speckit to give up
