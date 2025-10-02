@@ -5,3 +5,4 @@
 - Configuring running a project in windows that was created in mac is not easy
   - Maybe we should default to powershell on mac and windows
 - A too complicated project makes speckit to give up
+- /Specify + Jira MCP 
