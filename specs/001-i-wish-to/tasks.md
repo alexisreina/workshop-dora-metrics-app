@@ -5,14 +5,14 @@
 
 ## Phase 3.1: Setup
 - [X] T001 Update `.env.example` and `nuxt.config.ts` to expose `JIRA_BASE_URL`, `JIRA_CLIENT_ID`, and `JIRA_CLIENT_SECRET` via runtime config with secure defaults.
-- [ ] T002 Create Jira test utilities in `tests/utils/jiraMock.ts` for OAuth token, paginated search responses, and error payloads (MSW/vi-fetch mocks).
+- [X] T002 Create Jira test utilities in `tests/utils/jiraMock.ts` for OAuth token, paginated search responses, and error payloads (MSW/vi-fetch mocks).
 
 ## Phase 3.2: Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
 **CRITICAL: These tests MUST be written and MUST FAIL before ANY implementation**
-- [ ] T003 [P] Add contract test `tests/contract/api/jira/active-tickets.contract.spec.ts` validating `/api/jira/active-tickets` against `contracts/active-tickets.openapi.json`, including cache metadata fields and key/summary payload expectations (covers FR-001, FR-003, FR-011).
-- [ ] T004 [P] Add unit tests `tests/unit/server/utilities/caching/ttl-cache.spec.ts` covering cache set/get, jitter application, and TTL expiry beyond five minutes (covers FR-007, FR-011).
-- [ ] T005 [P] Add unit tests `tests/unit/server/utilities/jira/client.spec.ts` for OAuth token refresh, multi-page pagination (>50 issues), and error propagation using required JQL (covers FR-002, FR-009, FR-010).
-- [ ] T006 Add unit tests `tests/unit/server/api/jira/active-tickets.spec.ts` for handler behavior (401, 429 backoff, cache hit, telemetry emission, and actionable user-facing error messaging) ensuring current-user filtering (covers FR-001, FR-006, FR-008, FR-009).
+- [X] T003 [P] Add contract test `tests/contract/api/jira/active-tickets.contract.spec.ts` validating `/api/jira/active-tickets` against `contracts/active-tickets.openapi.json`, including cache metadata fields and key/summary payload expectations (covers FR-001, FR-003, FR-011).
+- [X] T004 [P] Add unit tests `tests/unit/server/utilities/caching/ttl-cache.spec.ts` covering cache set/get, jitter application, and TTL expiry beyond five minutes (covers FR-007, FR-011).
+- [X] T005 [P] Add unit tests `tests/unit/server/utilities/jira/client.spec.ts` for OAuth token refresh, multi-page pagination (>50 issues), and error propagation using required JQL (covers FR-002, FR-009, FR-010).
+- [X] T006 Add unit tests `tests/unit/server/api/jira/active-tickets.spec.ts` for handler behavior (401, 429 backoff, cache hit, telemetry emission, and actionable user-facing error messaging) ensuring current-user filtering (covers FR-001, FR-006, FR-008, FR-009).
 - [ ] T007 [P] Add component tests `tests/unit/components/ticket-list/ActiveTicketsList.spec.ts` for loading, empty, error (message content), list rendering, and data freshness timestamp visibility (covers FR-004, FR-005, FR-008).
 - [ ] T008 [P] Add integration test `tests/integration/pages/tickets-page.spec.ts` asserting `/tickets` route renders raw text list, shows data freshness/filters, and respects refresh interval messaging (covers FR-004, FR-007).
 - [ ] T009 [P] Add Playwright e2e spec `tests/e2e/jira-active-tickets.spec.ts` covering end-to-end fetch, pagination scenarios, error banner accessibility, and aria landmarks (covers FR-004, FR-005, FR-008).
