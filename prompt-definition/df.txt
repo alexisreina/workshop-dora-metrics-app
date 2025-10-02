@@ -1,0 +1,21 @@
+Deployment Frequency view for a DORA app using only local deterministic fake data and an in memory api facade no external calls
+Goal
+Show production deployment counts over time with chart summary and table
+Presets 14 days 30 days 90 days 6 months and custom
+Group by day week month
+Filters for project repository environment
+Toggle 7 day rolling average for day only
+Rules
+Count only succeeded deployments in production or prod case insensitive
+Use local timezone
+Labels day yyyy mm dd week yyyy Wxx month yyyy mm
+DF always counts production only
+Fake data
+Default six months with seed
+Higher Tue to Thu lower weekends
+Occasional burst days
+Failure about ten to fifteen percent with higher production success
+Times between 08 00 and 20 00
+Include non prod in raw events
+Deliver
+Module view mock data generator and in memory api for series summary and raw events
