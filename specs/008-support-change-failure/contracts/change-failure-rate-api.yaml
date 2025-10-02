@@ -1,0 +1,344 @@
+openapi: 3.0.3
+info:
+  title: Change Failure Rate API
+  description: API endpoints for DORA Change Failure Rate metric
+  version: 1.0.0
+  contact:
+    name: DORA Metrics App
+    
+servers:
+  - url: /api/metrics/change-failure-rate
+    description: Change Failure Rate API endpoints
+
+paths:
+  /:
+    get:
+      summary: Get current Change Failure Rate metric
+      description: Returns the current Change Failure Rate percentage with metadata
+      parameters:
+        - name: period
+          in: query
+          description: Time period for metric calculation
+          required: false
+          schema:
+            type: string
+            enum: [daily, weekly, monthly, quarterly]
+            default: monthly
+        - name: startDate
+          in: query
+          description: Custom start date (ISO 8601 format)
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          description: Custom end date (ISO 8601 format)
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Change Failure Rate metric retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeFailureRateResponse'
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /historical:
+    get:
+      summary: Get historical Change Failure Rate trends
+      description: Returns historical Change Failure Rate data for trend analysis
+      parameters:
+        - name: period
+          in: query
+          description: Time period granularity for historical data
+          required: false
+          schema:
+            type: string
+            enum: [daily, weekly, monthly, quarterly]
+            default: monthly
+        - name: limit
+          in: query
+          description: Maximum number of historical data points to return
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 12
+      responses:
+        '200':
+          description: Historical data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalDataResponse'
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /benchmarks:
+    get:
+      summary: Get industry benchmark data
+      description: Returns DORA industry benchmarks for Change Failure Rate comparison
+      responses:
+        '200':
+          description: Benchmark data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BenchmarkResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ChangeFailureRateResponse:
+      type: object
+      required:
+        - metric
+        - period
+        - dataQuality
+        - lastUpdated
+      properties:
+        metric:
+          $ref: '#/components/schemas/ChangeFailureRateMetric'
+        period:
+          $ref: '#/components/schemas/TimePeriod'
+        dataQuality:
+          $ref: '#/components/schemas/DataQualityStatus'
+        lastUpdated:
+          type: string
+          format: date-time
+          description: When the data was last updated
+
+    ChangeFailureRateMetric:
+      type: object
+      required:
+        - value
+        - totalDeployments
+        - failedDeployments
+        - calculatedAt
+      properties:
+        value:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Change Failure Rate as a percentage (whole numbers only)
+        totalDeployments:
+          type: integer
+          minimum: 0
+          description: Total number of deployments in the period
+        failedDeployments:
+          type: integer
+          minimum: 0
+          description: Number of deployments that caused failures
+        calculatedAt:
+          type: string
+          format: date-time
+          description: When this metric was calculated
+
+    HistoricalDataResponse:
+      type: object
+      required:
+        - data
+        - period
+        - totalPoints
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoricalDataPoint'
+          description: Array of historical data points
+        period:
+          type: string
+          enum: [daily, weekly, monthly, quarterly]
+          description: Time period granularity
+        totalPoints:
+          type: integer
+          minimum: 0
+          description: Total number of data points returned
+
+    HistoricalDataPoint:
+      type: object
+      required:
+        - date
+        - value
+        - totalDeployments
+        - failedDeployments
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date for this data point
+        value:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Change Failure Rate percentage for this period
+        totalDeployments:
+          type: integer
+          minimum: 0
+          description: Total deployments in this period
+        failedDeployments:
+          type: integer
+          minimum: 0
+          description: Failed deployments in this period
+
+    BenchmarkResponse:
+      type: object
+      required:
+        - benchmarks
+        - source
+        - lastUpdated
+      properties:
+        benchmarks:
+          type: array
+          items:
+            $ref: '#/components/schemas/BenchmarkData'
+          description: Industry benchmark categories
+        source:
+          type: string
+          description: Source of benchmark data
+        lastUpdated:
+          type: string
+          format: date
+          description: When benchmark data was last updated
+
+    BenchmarkData:
+      type: object
+      required:
+        - category
+        - minValue
+        - maxValue
+        - description
+      properties:
+        category:
+          type: string
+          enum: [elite, high, medium, low]
+          description: Performance category
+        minValue:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Minimum percentage for this category
+        maxValue:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Maximum percentage for this category
+        description:
+          type: string
+          description: Description of the performance level
+
+    TimePeriod:
+      type: object
+      required:
+        - startDate
+        - endDate
+        - type
+        - label
+      properties:
+        startDate:
+          type: string
+          format: date
+          description: Start date of the period
+        endDate:
+          type: string
+          format: date
+          description: End date of the period
+        type:
+          type: string
+          enum: [daily, weekly, monthly, quarterly]
+          description: Type of time period
+        label:
+          type: string
+          description: Human-readable period description
+
+    DataQualityStatus:
+      type: string
+      enum: [complete, partial, insufficient]
+      description: Indicates completeness of underlying data
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: object
+          description: Additional error details (optional)
+
+  examples:
+    ChangeFailureRateExample:
+      summary: Example Change Failure Rate response
+      value:
+        metric:
+          value: 15
+          totalDeployments: 100
+          failedDeployments: 15
+          calculatedAt: "2025-10-02T10:30:00Z"
+        period:
+          startDate: "2025-09-02"
+          endDate: "2025-10-02"
+          type: "monthly"
+          label: "Last 30 days"
+        dataQuality: "complete"
+        lastUpdated: "2025-10-02T10:30:00Z"
+
+    BenchmarkExample:
+      summary: Example benchmark response
+      value:
+        benchmarks:
+          - category: "elite"
+            minValue: 0
+            maxValue: 5
+            description: "Elite performers have very low failure rates"
+          - category: "high"
+            minValue: 6
+            maxValue: 10
+            description: "High performers maintain good deployment quality"
+          - category: "medium"
+            minValue: 11
+            maxValue: 20
+            description: "Medium performers have moderate failure rates"
+          - category: "low"
+            minValue: 21
+            maxValue: 100
+            description: "Low performers experience frequent deployment failures"
+        source: "DORA State of DevOps Report 2023"
+        lastUpdated: "2023-10-01"
