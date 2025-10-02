@@ -6,6 +6,7 @@
 **Input**: User description: "Deployment Frequency view for a DORA app using only local deterministic fake data and an in memory api facade no external calls"
 
 ## Execution Flow (main)
+
 ```
 1. Parse user description from Input
    → If empty: ERROR "No feature description provided"
@@ -28,24 +29,28 @@
 ---
 
 ## ⚡ Quick Guidelines
+
 - ✅ Focus on WHAT users need and WHY
 - ❌ Avoid HOW to implement (no tech stack, APIs, code structure)
 - 👥 Written for business stakeholders, not developers
 
 ### Section Requirements
+
 - **Mandatory sections**: Must be completed for every feature
 - **Optional sections**: Include only when relevant to the feature
 - When a section doesn't apply, remove it entirely (don't leave as "N/A")
 - **Frontend Focus**: Specifications should emphasize user experience, component interactions, and UI/UX requirements
 
 ### For AI Generation
+
 When creating this spec from a user prompt:
+
 1. **Mark all ambiguities**: Use [NEEDS CLARIFICATION: specific question] for any assumption you'd need to make
 2. **Don't guess**: If the prompt doesn't specify something (e.g., "login system" without auth method), mark it
 3. **Think like a tester**: Every vague requirement should fail the "testable and unambiguous" checklist item
 4. **Common underspecified areas**:
    - User types and permissions
-   - Data retention/deletion policies  
+   - Data retention/deletion policies
    - Performance targets and scale
    - Error handling behaviors
    - Integration requirements
@@ -59,18 +64,21 @@ When creating this spec from a user prompt:
 ## Clarifications
 
 ### Session 2025-10-02
+
 - Q: How should weeks be defined and labeled? → A: ISO-8601, weeks start Monday; label `yyyy-Www`.
 - Q: For ranges under 7 days, what should the 7-day rolling average do? → A: Compute partial-window average over available days.
 - Q: Should the summary include comparison to previous period? → A: Yes—delta and percent change.
 - Q: How should filters source selectable values? → A: Static predefined lists (deterministic).
 - Q: For Production matching, treat partial names like `prod-eu`? → A: No—exact `prod` or `production` only (case-insensitive).
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### Primary User Story
+
 As an engineering leader or team member, I want to see how often we successfully deploy to Production over time so that I can understand release cadence, spot trends, and identify anomalies without relying on external systems.
 
 ### Acceptance Scenarios
+
 1. **Given** the Deployment Frequency view loads with defaults, **When** no preset is selected by the user, **Then** the view shows Production deployment counts over the last 6 months with a chart, a summary, and a table of raw events.
 2. **Given** range presets exist, **When** the user selects 14 days, 30 days, 90 days, 6 months, or Custom, **Then** the chart, summary, and table refresh deterministically for that range.
 3. **Given** grouping controls exist, **When** the user toggles between Day, Week, or Month, **Then** the series re-buckets accordingly and labels follow: day `yyyy-mm-dd`, week `yyyy-Www` (ISO-8601, weeks start Monday), month `yyyy-mm`.
@@ -82,6 +90,7 @@ As an engineering leader or team member, I want to see how often we successfully
 9. **Given** DF counts Production only, **When** environments include non-Production entries, **Then** those events do not contribute to the DF counts but are visible in the raw events table.
 
 ### Edge Cases
+
 - No deployments in selected range → chart shows zero counts, summary shows zeros, table may be empty.
 - Custom date range extends beyond available 6-month default dataset → out-of-range dates show zero counts.
 - All filtered results are non-Production or failed → DF series shows zeros; raw table still lists matching events.
@@ -90,9 +99,10 @@ As an engineering leader or team member, I want to see how often we successfully
 - Daylight saving transitions → bucket by local time; ensure boundaries track timezone shifts.
 - Environments like `prod-eu` or `production-us` should NOT count toward DF; only exact `prod` or `production` match (case-insensitive) contributes.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
+
 - **FR-001**: System MUST display Production deployment counts over time as a chart with presets: 14 days, 30 days, 90 days, 6 months, and Custom.
 - **FR-002**: System MUST support grouping by Day, Week, and Month with labels: Day `yyyy-mm-dd`, Week `yyyy-Www` (ISO-8601, weeks start Monday), Month `yyyy-mm`.
 - **FR-003**: System MUST provide filters for Project, Repository, and Environment.
@@ -108,7 +118,8 @@ As an engineering leader or team member, I want to see how often we successfully
 - **FR-012**: System MUST ensure DF always counts Production-only events; non-Production events must not contribute to DF counts.
 - **FR-013**: System MUST behave deterministically for the same inputs (range, grouping, filters, seed).
 
-### Key Entities *(include if feature involves data)*
+### Key Entities _(include if feature involves data)_
+
 - **Deployment Event**: Represents a single deployment attempt; attributes: id, timestamp (local), project, repository, environment, status (success/failure), duration [optional], notes/tags [optional].
 - **Deployment Series**: Aggregation of counts per bucket; attributes: grouping (Day/Week/Month), buckets [{ label, start, end, count }], optional rollingAverage when Day and toggle ON.
 - **Deployment Summary**: Totals for selected range/grouping; attributes: totalProductionSuccesses, averagePerBucket, previousPeriodDelta, previousPeriodPercentChange.
@@ -116,24 +127,28 @@ As an engineering leader or team member, I want to see how often we successfully
 
 ---
 
-### Key Entities *(include if feature involves data)*
+### Key Entities _(include if feature involves data)_
+
 - **[Entity 1]**: [What it represents, key attributes without implementation]
 - **[Entity 2]**: [What it represents, relationships to other entities]
 
 ---
 
 ## Review & Acceptance Checklist
-*GATE: Automated checks run during main() execution*
+
+_GATE: Automated checks run during main() execution_
 
 ### Content Quality
+
 - [ ] No implementation details (languages, frameworks, APIs)
 - [ ] Focused on user value and business needs
 - [ ] Written for non-technical stakeholders
 - [ ] All mandatory sections completed
 
 ### Requirement Completeness
+
 - [ ] No [NEEDS CLARIFICATION] markers remain
-- [ ] Requirements are testable and unambiguous  
+- [ ] Requirements are testable and unambiguous
 - [ ] Success criteria are measurable
 - [ ] Scope is clearly bounded
 - [ ] Dependencies and assumptions identified
@@ -141,7 +156,8 @@ As an engineering leader or team member, I want to see how often we successfully
 ---
 
 ## Execution Status
-*Updated by main() during processing*
+
+_Updated by main() during processing_
 
 - [ ] User description parsed
 - [ ] Key concepts extracted

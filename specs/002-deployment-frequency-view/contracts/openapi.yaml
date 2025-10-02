@@ -17,10 +17,10 @@ paths:
           schema: { type: string, format: date }
         - in: query
           name: preset
-          schema: { type: string, enum: ["14d","30d","90d","6m","custom"] }
+          schema: { type: string, enum: ['14d', '30d', '90d', '6m', 'custom'] }
         - in: query
           name: groupBy
-          schema: { type: string, enum: ["day","week","month"] }
+          schema: { type: string, enum: ['day', 'week', 'month'] }
           required: true
         - in: query
           name: project
@@ -53,10 +53,10 @@ paths:
           schema: { type: string, format: date }
         - in: query
           name: preset
-          schema: { type: string, enum: ["14d","30d","90d","6m","custom"] }
+          schema: { type: string, enum: ['14d', '30d', '90d', '6m', 'custom'] }
         - in: query
           name: groupBy
-          schema: { type: string, enum: ["day","week","month"] }
+          schema: { type: string, enum: ['day', 'week', 'month'] }
           required: true
         - in: query
           name: project
@@ -86,7 +86,7 @@ paths:
           schema: { type: string, format: date }
         - in: query
           name: preset
-          schema: { type: string, enum: ["14d","30d","90d","6m","custom"] }
+          schema: { type: string, enum: ['14d', '30d', '90d', '6m', 'custom'] }
         - in: query
           name: project
           schema: { type: string }
