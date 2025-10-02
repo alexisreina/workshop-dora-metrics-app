@@ -26,6 +26,8 @@
 - [ ] T011 [P] Rolling average day-only; partial-window <7 days → `tests/integration/df.rolling-average.spec.ts`
 - [ ] T012 [P] Filters: DF counts only exact `prod`/`production` (case-insensitive) → `tests/integration/df.filters-production.spec.ts`
 - [ ] T013 [P] Summary includes delta and percent vs previous period → `tests/integration/df.summary-deltas.spec.ts`
+- [ ] T013a [P] Custom date range selection boundaries constrained to dataset → `tests/integration/df.custom-range.spec.ts`
+- [ ] T013b [P] Determinism: same inputs/seed yield identical series/summary → `tests/integration/df.determinism.spec.ts`
 
 ### Unit tests for core logic
 - [ ] T014 [P] Fake data generator respects seed, 08:00–20:00 window, weekday/weekend distribution → `tests/unit/df/fakeDataGenerator.test.ts`

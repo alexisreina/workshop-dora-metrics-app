@@ -73,7 +73,7 @@ As an engineering leader or team member, I want to see how often we successfully
 ### Acceptance Scenarios
 1. **Given** the Deployment Frequency view loads with defaults, **When** no preset is selected by the user, **Then** the view shows Production deployment counts over the last 6 months with a chart, a summary, and a table of raw events.
 2. **Given** range presets exist, **When** the user selects 14 days, 30 days, 90 days, 6 months, or Custom, **Then** the chart, summary, and table refresh deterministically for that range.
-3. **Given** grouping controls exist, **When** the user toggles between Day, Week, or Month, **Then** the series re-buckets accordingly and labels follow: day `yyyy-mm-dd`, week `yyyy-Wxx` (ISO-8601, weeks start Monday), month `yyyy-mm`.
+3. **Given** grouping controls exist, **When** the user toggles between Day, Week, or Month, **Then** the series re-buckets accordingly and labels follow: day `yyyy-mm-dd`, week `yyyy-Www` (ISO-8601, weeks start Monday), month `yyyy-mm`.
 4. **Given** a 7-day rolling average toggle, **When** grouping is Day and the toggle is ON, **Then** a 7-day rolling average line is shown; **And** when grouping is Week or Month, the toggle is disabled or hidden.
 5. **Given** filters for Project, Repository, and Environment, **When** filters are applied, **Then** the DF metric counts only successful deployments to Production (case-insensitive exact match: `production` or `prod` only) while the raw events table may still include non-Production entries for context.
 6. **Given** local timezone usage, **When** data is bucketed and displayed, **Then** all timestamps and bucket boundaries reflect the user's local timezone, with deployment times constrained to 08:00–20:00.
@@ -86,7 +86,7 @@ As an engineering leader or team member, I want to see how often we successfully
 - Custom date range extends beyond available 6-month default dataset → out-of-range dates show zero counts.
 - All filtered results are non-Production or failed → DF series shows zeros; raw table still lists matching events.
 - Short ranges (< 7 days) with rolling average ON → compute partial-window average over available days.
-- Week grouping across year boundary → label format `yyyy-Wxx` follows ISO-8601 (weeks start Monday) and may roll over.
+- Week grouping across year boundary → label format `yyyy-Www` follows ISO-8601 (weeks start Monday) and may roll over.
 - Daylight saving transitions → bucket by local time; ensure boundaries track timezone shifts.
 - Environments like `prod-eu` or `production-us` should NOT count toward DF; only exact `prod` or `production` match (case-insensitive) contributes.
 
@@ -94,7 +94,7 @@ As an engineering leader or team member, I want to see how often we successfully
 
 ### Functional Requirements
 - **FR-001**: System MUST display Production deployment counts over time as a chart with presets: 14 days, 30 days, 90 days, 6 months, and Custom.
-- **FR-002**: System MUST support grouping by Day, Week, and Month with labels: Day `yyyy-mm-dd`, Week `yyyy-Wxx` (ISO-8601, weeks start Monday), Month `yyyy-mm`.
+- **FR-002**: System MUST support grouping by Day, Week, and Month with labels: Day `yyyy-mm-dd`, Week `yyyy-Www` (ISO-8601, weeks start Monday), Month `yyyy-mm`.
 - **FR-003**: System MUST provide filters for Project, Repository, and Environment.
 - **FR-004**: System MUST compute DF using only successful deployments to Production environments, with case-insensitive exact match on environment name: `production` or `prod` only.
 - **FR-005**: System MUST use the local timezone for bucketing and displaying timestamps.
@@ -104,14 +104,14 @@ As an engineering leader or team member, I want to see how often we successfully
 - **FR-014**: Filter selectable values (Project, Repository, Environment) MUST come from static predefined lists to preserve determinism.
 - **FR-009**: System MUST default to a deterministic fake dataset covering the last six months, seeded so that repeated sessions with the same seed produce identical outputs.
 - **FR-010**: System MUST model realistic distributions: higher Tue–Thu counts, lower weekends, occasional burst days, and ~10–15% failures with higher Production success rates vs non-Production; events occur between 08:00 and 20:00 local time.
-- **FR-011**: System MUST allow selecting a Custom date range via start and end dates [NEEDS CLARIFICATION: maximum range size].
+- **FR-011**: System MUST allow selecting a Custom date range via start and end dates with no hard maximum; selection is constrained to the available dataset range.
 - **FR-012**: System MUST ensure DF always counts Production-only events; non-Production events must not contribute to DF counts.
 - **FR-013**: System MUST behave deterministically for the same inputs (range, grouping, filters, seed).
 
 ### Key Entities *(include if feature involves data)*
-- **Deployment Event**: Represents a single deployment attempt; attributes: id, timestamp (local), project, repository, environment, status (success/failure), duration [NEEDS CLARIFICATION], notes/tags [optional].
+- **Deployment Event**: Represents a single deployment attempt; attributes: id, timestamp (local), project, repository, environment, status (success/failure), duration [optional], notes/tags [optional].
 - **Deployment Series**: Aggregation of counts per bucket; attributes: grouping (Day/Week/Month), buckets [{ label, start, end, count }], optional rollingAverage when Day and toggle ON.
-- **Deployment Summary**: Totals for selected range/grouping; attributes: totalProductionSuccesses, averagePerBucket, optional comparison vs previous period [NEEDS CLARIFICATION].
+- **Deployment Summary**: Totals for selected range/grouping; attributes: totalProductionSuccesses, averagePerBucket, previousPeriodDelta, previousPeriodPercentChange.
 - **Filters**: Current filter selections; attributes: project, repository, environment. Values sourced from static predefined lists (deterministic).
 
 ---
