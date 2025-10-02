@@ -1,10 +1,10 @@
+# Implementation Plan: Build a top bar with the app name and a sidebar where we can place internal navigation to the different metrics, for the index page build just a welcome page with some description of what the app is about
 
-# Implementation Plan: [FEATURE]
-
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Branch**: `001-build-a-top` | **Date**: 2025-01-27 | **Spec**: [spec.md](./spec.md)
+**Input**: Feature specification from `/specs/001-build-a-top/spec.md`
 
 ## Execution Flow (/plan command scope)
+
 ```
 1. Load feature spec from Input path
    → If not found: ERROR "No feature spec at {path}"
@@ -27,39 +27,45 @@
 ```
 
 **IMPORTANT**: The /plan command STOPS at step 7. Phases 2-4 are executed by other commands:
+
 - Phase 2: /tasks command creates tasks.md
 - Phase 3-4: Implementation execution (manual or via tools)
 
 ## Summary
-[Extract from feature spec: primary requirement + technical approach from research]
+
+Build a responsive navigation layout with top bar and sidebar for a DORA metrics application. The feature includes a top bar displaying "DORA Metrics App", a collapsible sidebar with placeholder navigation items, and a welcome page explaining DORA metrics. Mobile-first design with hamburger menu for sidebar toggle.
 
 ## Technical Context
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+
+**Language/Version**: TypeScript 5.x, Vue 3.5+  
+**Primary Dependencies**: Nuxt 4, PrimeVue 4.4, Tailwind CSS 4.x, @frontiers/prime-preset  
+**Storage**: N/A (frontend-only navigation)  
+**Testing**: Vue Test Utils, Vitest, ESLint, Prettier  
+**Target Platform**: Web browsers (responsive design)  
+**Project Type**: web (Nuxt 4 full-stack application)  
+**Performance Goals**: <100ms navigation transitions, <2s initial load  
+**Constraints**: Mobile-first responsive design, accessibility compliance (WCAG 2.1)  
+**Scale/Scope**: Single-page application with navigation structure
 
 ## Constitution Check
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
 ### Frontend Application Compliance
-- [ ] **SOLID Principles**: All components follow single responsibility, open/closed, Liskov substitution, interface segregation, and dependency inversion
-- [ ] **Vue 3 Composition API**: Components use `<script setup>` syntax and Composition API patterns
-- [ ] **Nuxt 4 Framework**: Leveraging Nuxt 4 for full-stack capabilities, SSR, and module system
-- [ ] **PrimeVue Components**: Using PrimeVue component library for UI elements
-- [ ] **Tailwind CSS**: Utility-first styling approach with minimal custom CSS
-- [ ] **KISS Principle**: Complexity justified, simple solutions preferred
-- [ ] **Code Quality**: ESLint and Prettier compliance, TypeScript usage
-- [ ] **Testing Strategy**: Unit tests for composables, component tests, integration tests for user flows
+
+- [x] **SOLID Principles**: Navigation components follow single responsibility, composable design
+- [x] **Vue 3 Composition API**: All components will use `<script setup>` syntax and Composition API patterns
+- [x] **Nuxt 4 Framework**: Leveraging Nuxt 4 for SSR, file-based routing, and module system
+- [x] **PrimeVue Components**: Using PrimeVue for navigation components and responsive layout
+- [x] **Tailwind CSS**: Utility-first styling for responsive design and component styling
+- [x] **KISS Principle**: Simple navigation structure, minimal complexity
+- [x] **Code Quality**: ESLint and Prettier compliance, TypeScript for type safety
+- [x] **Testing Strategy**: Component tests for navigation, integration tests for user flows
 
 ## Project Structure
 
 ### Documentation (this feature)
+
 ```
 specs/[###-feature]/
 ├── plan.md              # This file (/plan command output)
@@ -71,71 +77,67 @@ specs/[###-feature]/
 ```
 
 ### Source Code (repository root)
+
 <!--
   ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
   for this feature. Delete unused options and expand the chosen structure with
   real paths (e.g., apps/admin, packages/something). The delivered plan must
   not include Option labels.
 -->
+
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Nuxt 4 Full-Stack Application (DEFAULT for this project)
 app/
 ├── components/
 │   ├── atoms/
+│   │   ├── AppLogo.vue
+│   │   └── NavigationItem.vue
 │   ├── molecules/
+│   │   ├── TopBar.vue
+│   │   └── Sidebar.vue
 │   ├── organisms/
+│   │   └── NavigationLayout.vue
 │   └── templates/
+│       └── DefaultLayout.vue
 ├── pages/
+│   ├── index.vue
+│   └── metrics/
+│       ├── [slug].vue
+│       └── index.vue
 ├── composables/
+│   ├── useNavigation.ts
+│   └── useMobile.ts
 ├── middleware/
+│   └── navigation.global.ts
 ├── plugins/
+│   └── primevue.client.ts
 ├── server/
-│   ├── api/
-│   └── middleware/
+│   └── api/
+│       └── navigation/
+│           └── index.get.ts
 └── utils/
-
-src/
-├── components/
-├── pages/
-├── styles/
-├── test/
-└── utils/
+    └── navigation.ts
 
 tests/
 ├── unit/
+│   ├── components/
+│   └── composables/
 ├── integration/
+│   └── navigation.spec.ts
 └── e2e/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+    └── navigation.spec.ts
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Nuxt 4 full-stack application structure with atomic design principles. Components organized by complexity (atoms → molecules → organisms → templates), composables for shared logic, and comprehensive testing structure. Mobile-first responsive design with server-side rendering capabilities.
 
 ## Phase 0: Outline & Research
+
 1. **Extract unknowns from Technical Context** above:
    - For each NEEDS CLARIFICATION → research task
    - For each dependency → best practices task
    - For each integration → patterns task
 
 2. **Generate and dispatch research agents**:
+
    ```
    For each unknown in Technical Context:
      Task: "Research {unknown} for {feature context}"
@@ -151,7 +153,8 @@ directories captured above]
 **Output**: research.md with all NEEDS CLARIFICATION resolved
 
 ## Phase 1: Design & Contracts
-*Prerequisites: research.md complete*
+
+_Prerequisites: research.md complete_
 
 1. **Extract entities from feature spec** → `data-model.md`:
    - Entity name, fields, relationships
@@ -181,21 +184,24 @@ directories captured above]
    - Keep under 150 lines for token efficiency
    - Output to repository root
 
-**Output**: data-model.md, /contracts/*, failing tests, quickstart.md, agent-specific file
+**Output**: data-model.md, /contracts/\*, failing tests, quickstart.md, agent-specific file
 
 ## Phase 2: Task Planning Approach
-*This section describes what the /tasks command will do - DO NOT execute during /plan*
+
+_This section describes what the /tasks command will do - DO NOT execute during /plan_
 
 **Task Generation Strategy**:
+
 - Load `.specify/templates/tasks-template.md` as base
 - Generate tasks from Phase 1 design docs (contracts, data model, quickstart)
 - Each contract → contract test task [P]
-- Each entity → model creation task [P] 
+- Each entity → model creation task [P]
 - Each user story → integration test task
 - Implementation tasks to make tests pass
 
 **Ordering Strategy**:
-- TDD order: Tests before implementation 
+
+- TDD order: Tests before implementation
 - Dependency order: Models before services before UI
 - Mark [P] for parallel execution (independent files)
 
@@ -204,37 +210,42 @@ directories captured above]
 **IMPORTANT**: This phase is executed by the /tasks command, NOT by /plan
 
 ## Phase 3+: Future Implementation
-*These phases are beyond the scope of the /plan command*
+
+_These phases are beyond the scope of the /plan command_
 
 **Phase 3**: Task execution (/tasks command creates tasks.md)  
 **Phase 4**: Implementation (execute tasks.md following constitutional principles)  
 **Phase 5**: Validation (run tests, execute quickstart.md, performance validation)
 
 ## Complexity Tracking
-*Fill ONLY if Constitution Check has violations that must be justified*
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+_Fill ONLY if Constitution Check has violations that must be justified_
 
+| Violation                  | Why Needed         | Simpler Alternative Rejected Because |
+| -------------------------- | ------------------ | ------------------------------------ |
+| [e.g., 4th project]        | [current need]     | [why 3 projects insufficient]        |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient]  |
 
 ## Progress Tracking
-*This checklist is updated during execution flow*
+
+_This checklist is updated during execution flow_
 
 **Phase Status**:
-- [ ] Phase 0: Research complete (/plan command)
-- [ ] Phase 1: Design complete (/plan command)
+
+- [x] Phase 0: Research complete (/plan command)
+- [x] Phase 1: Design complete (/plan command)
 - [ ] Phase 2: Task planning complete (/plan command - describe approach only)
 - [ ] Phase 3: Tasks generated (/tasks command)
 - [ ] Phase 4: Implementation complete
 - [ ] Phase 5: Validation passed
 
 **Gate Status**:
-- [ ] Initial Constitution Check: PASS
-- [ ] Post-Design Constitution Check: PASS
-- [ ] All NEEDS CLARIFICATION resolved
-- [ ] Complexity deviations documented
+
+- [x] Initial Constitution Check: PASS
+- [x] Post-Design Constitution Check: PASS
+- [x] All NEEDS CLARIFICATION resolved
+- [x] Complexity deviations documented
 
 ---
-*Based on Constitution v1.1.0 - See `/memory/constitution.md`*
+
+_Based on Constitution v1.1.0 - See `/memory/constitution.md`_

@@ -1,6 +1,6 @@
 # Workshop DORA Metrics App Development Guidelines
 
-Auto-generated from all feature plans. Last updated: [DATE]
+Auto-generated from all feature plans. Last updated: 2025-10-01
 
 ## Active Technologies
 - **Vue 3**: Composition API with `<script setup>` syntax
@@ -57,7 +57,7 @@ tests/
 - **Naming**: PascalCase for components, camelCase for composables and utilities
 
 ## Recent Changes
-[LAST 3 FEATURES AND WHAT THEY ADDED]
+- 001-build-a-top: Added TypeScript 5.x, Vue 3.5+ + Nuxt 4, PrimeVue 4.4, Tailwind CSS 4.x, @frontiers/prime-prese
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->
