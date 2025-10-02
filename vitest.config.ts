@@ -1,22 +1,21 @@
-import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
-
-const projectRoot = fileURLToPath(new URL('./', import.meta.url));
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '~': projectRoot,
-      '@': projectRoot,
-    },
-  },
+  plugins: [vue()],
   test: {
+    environment: 'happy-dom',
     globals: true,
-    environment: 'jsdom',
     setupFiles: ['./tests/setup.ts'],
     coverage: {
       enabled: false,
     },
   },
+  resolve: {
+    alias: {
+      '~': resolve(__dirname, './app'),
+      '@': resolve(__dirname, './app'),
+    },
+  },
 });
-

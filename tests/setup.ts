@@ -1,35 +1,27 @@
-import '@testing-library/jest-dom';
-import { TextEncoder, TextDecoder } from 'node:util';
+// Global test setup
+import { config } from '@vue/test-utils';
+import { vi } from 'vitest';
 
-if (!(globalThis.TextEncoder instanceof Function)) {
-  // @ts-expect-error: assigning Node polyfill to global scope for Vitest
-  globalThis.TextEncoder = TextEncoder;
-}
+// Mock Nuxt composables
+global.useRoute = () => ({
+  path: '/',
+  params: {},
+  query: {},
+});
 
-if (!(globalThis.TextDecoder instanceof Function)) {
-  // @ts-expect-error: assigning Node polyfill to global scope for Vitest
-  globalThis.TextDecoder = TextDecoder;
-}
+global.useRouter = () => ({
+  push: vi.fn(),
+  replace: vi.fn(),
+  go: vi.fn(),
+  back: vi.fn(),
+  forward: vi.fn(),
+});
 
-try {
-  const encoder = new globalThis.TextEncoder();
-  const EncodedCtor = encoder.encode('').constructor;
+global.useHead = vi.fn();
+global.navigateTo = vi.fn();
 
-  if (EncodedCtor !== globalThis.Uint8Array) {
-    // ensure TextEncoder returns the shared Uint8Array realm
-    // @ts-expect-error: reassign encode for jsdom compatibility
-    globalThis.TextEncoder = class extends TextEncoder {
-      encode(input?: string) {
-        return new globalThis.Uint8Array(super.encode(input || ''));
-      }
-    };
-  }
-} catch (error) {
-  console.warn('TextEncoder polyfill adjustment failed:', error);
-}
-
-// Silence Nuxt composable warnings in jsdom environment
-globalThis.useRuntimeConfig = () => ({
+// Mock runtime config for Jira integration
+global.useRuntimeConfig = () => ({
   jira: {
     baseUrl: 'https://example.atlassian.net',
     clientId: 'test-client-id',
@@ -43,3 +35,15 @@ globalThis.useRuntimeConfig = () => ({
   },
 });
 
+// Configure Vue Test Utils
+config.global.mocks = {
+  $route: {
+    path: '/',
+    params: {},
+    query: {},
+  },
+  $router: {
+    push: vi.fn(),
+    replace: vi.fn(),
+  },
+};
