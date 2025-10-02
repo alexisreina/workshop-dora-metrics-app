@@ -25,3 +25,10 @@ logs
 .specify/scripts/powershell/**
 .specify/scripts/bash/**
 .cursor/commands/**
+.cursor/rules/commands/analyze.md
+.cursor/rules/commands/clarify.md
+.cursor/rules/commands/constitution.md
+.cursor/rules/commands/implement.md
+.cursor/rules/commands/plan.md
+.cursor/rules/commands/specify.md
+.cursor/rules/commands/tasks.md
